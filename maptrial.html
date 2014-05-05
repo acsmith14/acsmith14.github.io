@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Displaying text directions with <code>setPanel()</code></title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+    </style>
+    <style>
+      #directions-panel {
+        height: 100%;
+        float: right;
+        width: 390px;
+        overflow: auto;
+      }
+
+      #map-canvas {
+        margin-right: 400px;
+      }
+
+      #control {
+        background: #fff;
+        padding: 5px;
+        font-size: 14px;
+        font-family: Arial;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        display: none;
+      }
+
+      @media print {
+        #map-canvas {
+          height: 500px;
+          margin: 0;
+        }
+
+        #directions-panel {
+          float: none;
+          width: auto;
+        }
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var mapOptions = {
+    zoom: 7,
+    center: new google.maps.LatLng(41.850033, -87.6500523)
+	
+  };
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+  var control = document.getElementById('control');
+  control.style.display = 'block';
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+}
+
+function calcRoute() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var request = {
+    origin: start,
+    destination: end,
+    travelMode: google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="control">
+      <strong>Start:</strong>
+      <select id="start" onchange="calcRoute();">
+        <option value="appling, ga">Appling County</option>
+        <option value="atkinson, ga">Atkinson County</option>
+        <option value="bacon, ga">Bacon County</option>
+        <option value="baker, ga">Baker County</option>
+        <option value="baldwin, ga">Baldwin County</option>
+        <option value="banks, ga">Banks County</option>
+        <option value="barrow, ga">Barrow County</option>
+        <option value="bartow, ga">Bartow County</option>
+        <option value="ben hill, ga">Ben Hill County</option>
+        <option value="berrien, ga">Berrien County</option>
+		<option value="bibb, ga">Bibb County</option>
+		<option value="bleckley, ga">Bleckley County</option>
+		<option value="brantley, ga">Brantley County</option>
+		<option value="bryan, ga">Bryan County</option>
+		<option value="bulloch, ga">Bulloch County</option>
+		<option value="burke, ga">Burke County</option>
+		<option value="butts, ga">Butts County</option>
+		<option value="calhoun, ga">Calhoun County</option>
+		<option value="camden, ga">Camden County</option>
+		<option value="candler, ga">Candler County</option>
+		<option value="carroll, ga">Carroll County</option>
+		<option value="catoosa, ga">Catoosa County</option>
+		<option value="charlton, ga">Charlton County</option>
+		<option value="chatham, ga">Chatham County</option>
+		<option value="chattahoochee, ga">Chattahoochee County</option>
+		<option value="chattooga, ga">Chattooga County</option>
+		<option value="cherokee, ga">Cherokee County</option>
+		<option value="clarke, ga">Clarke County</option>
+		<option value="clay, ga">Clay County</option>
+		<option value="clayton, ga">Clayton County</option>
+		<option value="clinch, ga">Clinch County</option>
+		<option value="cobb, ga">Cobb County</option>
+		<option value="coffee, ga">Coffee County</option>
+		<option value="colquitt, ga">Colquitt County</option>
+		<option value="columbia, ga">Columbia County</option>
+		<option value="cook, ga">Cook County</option>
+        <option value="Coweta, ga">Coweta County</option>
+        <option value="crawford, ga">Crawford County</option>
+        <option value="crisp, ga">Crisp County</option>
+        <option value="dade, ga">Dade County</option>
+        <option value="dawson, ga">Dawson County</option>
+        <option value="decatur, ga">Decatur County</option>
+        <option value="dekalb, ga">DeKalb County</option>
+        <option value="dodge, ga">Dodge County</option>
+        <option value="dooly, ga">Dooly County</option>
+		<option value="dougherty, ga">Dougherty County</option>
+		<option value="douglas, ga">Douglas County</option>
+		<option value="early, ga">Early County</option>
+		<option value="echols, ga">Echols County</option>
+		<option value="effingham, ga">Effingham County</option>
+		<option value="elbert, ga">Elbert County</option>
+		<option value="emanuel, ga">Emanuel County</option>
+		<option value="evans, ga">evans County</option>
+		<option value="fannin, ga">Fannin County</option>
+		<option value="fayette, ga">Fayette County</option>
+		<option value="floyd, ga">Floyd County</option>
+		<option value="forsyth, ga">Forsyth County</option>
+		<option value="franklin, ga">Franklin County</option>
+		<option value="fulton, ga">Fulton County</option>
+		<option value="gilmer, ga">Gilmer County</option>
+		<option value="glascock, ga">Glascock County</option>
+		<option value="glynn, ga">Glynn County</option>
+		<option value="gordon, ga">Gordon County</option>
+		<option value="grady, ga">Grady County</option>
+		<option value="greene, ga">Greene County</option>
+		<option value="gwinnett, ga">Gwinnett County</option>
+		<option value="habersham, ga">Habersham County</option>
+		<option value="hall, ga">Hall County</option>
+		<option value="hancock, ga">Hancock County</option>
+		<option value="haralson, ga">Haralson County</option>
+		<option value="harris, ga">Harris County</option>
+        <option value="hart, ga">Hart County</option>
+        <option value="heard, ga">Heard County</option>
+        <option value="henry, ga">Henry County</option>
+        <option value="houston, ga">Houston County</option>
+        <option value="irwin, ga">Irwin County</option>
+        <option value="jackson, ga">Jackson County</option>
+        <option value="jasper, ga">Jasper County</option>
+        <option value="jeff davis, ga">Jeff Davis County</option>
+        <option value="jefferson, ga">Jefferson County</option>
+		<option value="jenkins, ga">Jenkins County</option>
+		<option value="johnson, ga">Johnson County</option>
+		<option value="jones, ga">Jones County</option>
+		<option value="lamar, ga">Lamar County</option>
+		<option value="lanier, ga">Lanier County</option>
+		<option value="laurens, ga">Laurens County</option>
+		<option value="lee, ga">Lee County</option>
+		<option value="liberty, ga">Liberty County</option>
+		<option value="lincoln, ga">Lincoln County</option>
+		<option value="long, ga">Long County</option>
+		<option value="lowndes, ga">Lowndes County</option>
+		<option value="lumpkin, ga">Lumpkin County</option>
+		<option value="macon, ga">Macon County</option>
+		<option value="madison, ga">Madison County</option>
+		<option value="marion, ga">Marion County</option>
+		<option value="mcduffie, ga">McDuffie County</option>
+		<option value="mcintosh, ga">McIntosh County</option>
+		<option value="meriwether, ga">Meriwether County</option>
+		<option value="miller, ga">Miller County</option>
+		<option value="mitchell, ga">Mitchell County</option>
+		<option value="monroe, ga">Monroe County</option>
+		<option value="montgomery, ga">Montgomery County</option>
+		<option value="murray, ga">Morgan County</option>
+		<option value="muscogee, ga">Muscogee County</option>
+		<option value="newton, ga">Newton County</option>
+		<option value="oconee, ga">Oconee County</option>
+        <option value="oglethorpe, ga">Oglethorpe County</option>
+        <option value="paulding, ga">Paulding County</option>
+        <option value="peach, ga">Peach County</option>
+        <option value="pickens, ga">Pickens County</option>
+        <option value="pierce, ga">Pierce County</option>
+        <option value="pike, ga">Pike County</option>
+        <option value="polk, ga">Polk County</option>
+        <option value="pulaski, ga">Pulaski County</option>
+        <option value="putnam, ga">Putnam County</option>
+		<option value="quitman, ga">Quitman County</option>
+		<option value="rabun, ga">Rabun County</option>
+		<option value="randolph, ga">Randolph County</option>
+		<option value="richmond, ga">Richmond County</option>
+		<option value="rockdale, ga">Rockdale County</option>
+		<option value="schley, ga">Schley County</option>
+		<option value="screven, ga">Screven County</option>
+		<option value="seminole, ga">Seminole County</option>
+		<option value="spalding, ga">Spalding County</option>
+		<option value="stephens, ga">Stephens County</option>
+		<option value="stewart, ga">Stewart County</option>
+		<option value="sumpter, ga">Sumpter County</option>
+		<option value="talbot, ga">Talbot County</option>
+		<option value="taliaferro, ga">Taliaferro County</option>
+		<option value="tattnall, ga">Tattnall County</option>
+		<option value="taylor, ga">Taylor County</option>
+		<option value="telfair, ga">Telfair County</option>
+		<option value="terrell, ga">Terrell County</option>
+		<option value="thomas, ga">Thomas County</option>
+		<option value="tift, ga">Tift County</option>
+		<option value="toombs, ga">Toombs County</option>
+		<option value="towns, ga">Towns County</option>
+		<option value="treutlen, ga">Treutlen County</option>
+		<option value="troup, ga">Troup County</option>
+		<option value="turner, ga">Turner County</option>
+		<option value="twiggs, ga">Twiggs County</option>
+        <option value="union, ga">Union County</option>
+        <option value="upson, ga">Upson County</option>
+        <option value="walker, ga">Walker County</option>
+        <option value="walton, ga">Walton County</option>
+        <option value="ware, ga">Ware County</option>
+        <option value="warren, ga">Warren County</option>
+        <option value="washington, ga">Washington County</option>
+        <option value="wayne, ga">Wayne County</option>
+        <option value="webster, ga">Webster County</option>
+		<option value="wheeler, ga">Wheeler County</option>
+		<option value="white, ga">White County</option>
+		<option value="whitfield, ga">Whitfield County</option>
+		<option value="wilcox, ga">Wilcox County</option>
+		<option value="wilkes, ga">Wilkes County</option>
+		<option value="wilkinson, ga">Wilkinson County</option>
+		<option value="worth, ga">Worth County</option>
+      </select>
+      <strong>End:</strong>
+      <select id="end" onchange="calcRoute();">
+        <option value="777 Hemlock St, Macon, Georgia 31201">Medical Center of Central Georgia, Inc.</option>
+        <option value="303 Parkway Dr, Atlanta, Georgia 30312">Atlanta Medical Center</option>
+        <option value="80 Jesse Hill Jr Dr SE, Atlanta, Georgia 30303">Grady Memorial Hospital</option>
+        <option value="1120 15th St, Augusta, Georgia 30912">Georgia Regents Medical Center</option>
+        <option value="4700 Waters Ave, Savannah, Georgia 31404">Memorial Health University Medical Center</option>
+        <option value="1199 Prince Ave, Athens, Georgia 30606">Athens Regional Medical Center</option>
+        <option value="304 Turner McCall Blvd, Rome, Georgia 30165">Floyd Medical Center</option>
+        <option value="1000 Medical Center Blvd, Lawrenceville, Georgia 30046">Gwinnett Medical Center</option>
+        <option value="1508 N Thornton Ave, Dalton, Georgia 30720">Hamilton Medical Center</option>
+        <option value="915 Gordon Ave, Thomasville, Georgia 31792">John D. Archbold Memorial Hospital</option>
+        <option value="710 Center St, Columbus, Georgia 31901">Medical Center-Columbus</option>
+        <option value="3000 Hospital Blvd, Roswell, Georgia 30076">North Fulton Hospital</option>
+		<option value="677 Church St, Marietta, Georgia 30060">Wellstar Kennestone Hospital</option>
+        <option value="2151 W Spring St, Monroe, Georgia 30655">Clearview Regional Medical Center</option>
+        <option value="790 U.S. 341, Hawkinsville, Georgia 31036">Taylor Regional Hospital</option>
+        <option value="2260 Wrightsboro Rd, Augusta, Georgia 30904">Trinity Hospital of Augusta</option>
+        <option value="902 N 7th St, Cordele, Georgia 31015">Crisp Regional Hospital</option>
+        <option value="459 Hwy 119 S, Springfield, Georgia 31329">Effingham Health System</option>
+        <option value="117 Kite Rd, Swainsboro, Georgia 30401">Emanuel Medical Center</option>
+        <option value="111 N 3rd St, Glenwood, Georgia 30428">Lower Oconee Community Hospital</option>
+        <option value="1077 S Main Street, Madison, Georgia 30650">Morgan Memorial Hospital</option>
+        <option value="120 Gordon Street, Washington, Georgia 30673">Wills Memorial Hospital</option> 
+      </select>
+    </div>
+    <div id="directions-panel"></div>
+    <div id="map-canvas"></div>
+  </body>
+</html>
